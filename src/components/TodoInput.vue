@@ -4,30 +4,40 @@
     <span class="addContainer" v-on:click="addToDo">
       <i class="fa-solid fa-plus addBtn"></i>
     </span>
+
+    <!-- use the modal component, pass in the prop -->
+    <Modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">custom header</h3>
+      <p slot="body">적절한 값을 입력하세요.</p>
+      <div slot="footer">copy</div>
+    </Modal>
   </div>
 </template>
 <script>
+import Modal from "./common/Modal.vue";
+
 export default {
   data() {
     return {
       newToDoItem: "",
+      showModal: false,
     };
   },
   methods: {
     addToDo: function () {
       if (this.newToDoItem !== "") {
-        const obj = {
-          completed: false,
-          item: this.newToDoItem,
-        };
-
-        localStorage.setItem(this.newToDoItem, JSON.stringify(obj));
+        this.$emit("addTodoItem", this.newToDoItem);
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput: function () {
       this.newToDoItem = "";
     },
+  },
+  components: {
+    Modal,
   },
 };
 </script>

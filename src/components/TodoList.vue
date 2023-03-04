@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li
-        v-for="(toDoItem, index) in toDoItems"
+        v-for="(toDoItem, index) in propsdata"
         v-bind:key="toDoItem.item"
         class="shadow"
       >
@@ -23,37 +23,13 @@
 </template>
 <script>
 export default {
-  components: {},
-  data() {
-    return {
-      toDoItems: [],
-    };
-  },
-  beforeCreate() {},
-  created() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        this.toDoItems.push(
-          JSON.parse(localStorage.getItem(localStorage.key(i)))
-        );
-      }
-    }
-  },
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeUnmount() {},
-  unmounted() {},
+  props: ["propsdata"],
   methods: {
     removeTodo: function (toDoItem, index) {
-      localStorage.removeItem(toDoItem);
-      this.toDoItems.splice(index, 1);
+      this.$emit("removeItem", toDoItem, index);
     },
-    toggleComplete: function (toDoItem) {
-      toDoItem.completed = !toDoItem.completed;
-      localStorage.removeItem(toDoItem.item);
-      localStorage.setItem(toDoItem.item, JSON.stringify(toDoItem));
+    toggleComplete: function (toDoItem, index) {
+      this.$emit("toggleItem", toDoItem, index);
     },
   },
 };
