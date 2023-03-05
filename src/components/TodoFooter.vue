@@ -4,12 +4,13 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   methods: {
-    clearTodo() {
-      // this.$emit("clearItems");
-      this.$store.commit("clearItems");
-    },
+    ...mapMutations({
+      clearTodo: "clearItems",
+    }),
   },
 };
 </script>
