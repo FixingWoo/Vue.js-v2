@@ -1,26 +1,11 @@
 <template>
   <header>
     <h1>TODO it!</h1>
+    <!-- <h1>{{ this.$store.state.headerText }}</h1> -->
   </header>
 </template>
 <script>
-export default {
-  components: {},
-  data() {
-    return {
-      sampleData: "",
-    };
-  },
-  beforeCreate() {},
-  created() {},
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeUnmount() {},
-  unmounted() {},
-  methods: {},
-};
+export default {};
 </script>
 
 <style scoped>

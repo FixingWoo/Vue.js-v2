@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li
-        v-for="(toDoItem, index) in propsdata"
+        v-for="(toDoItem, index) in this.$store.state.toDoItems"
         v-bind:key="toDoItem.item"
         class="shadow"
       >
@@ -23,13 +23,14 @@
 </template>
 <script>
 export default {
-  props: ["propsdata"],
   methods: {
-    removeTodo: function (toDoItem, index) {
-      this.$emit("removeItem", toDoItem, index);
+    removeTodo(toDoItem, index) {
+      // this.$emit("removeItem", toDoItem, index);
+      this.$store.commit("removeOneItem", { toDoItem, index });
     },
-    toggleComplete: function (toDoItem, index) {
-      this.$emit("toggleItem", toDoItem, index);
+    toggleComplete(toDoItem, index) {
+      // this.$emit("toggleItem", toDoItem, index);
+      this.$store.commit("toggleOneItem", { toDoItem, index });
     },
   },
 };

@@ -7,9 +7,11 @@
 
     <!-- use the modal component, pass in the prop -->
     <Modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">
+        경고!
+        <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
+      </h3>
       <p slot="body">적절한 값을 입력하세요.</p>
-      <div slot="footer">copy</div>
     </Modal>
   </div>
 </template>
@@ -24,15 +26,17 @@ export default {
     };
   },
   methods: {
-    addToDo: function () {
+    addToDo() {
       if (this.newToDoItem !== "") {
-        this.$emit("addTodoItem", this.newToDoItem);
+        // this.$emit("addTodoItem", this.newToDoItem);
+        const text = this.newToDoItem.trim();
+        this.$store.commit("addOneItem", text);
         this.clearInput();
       } else {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function () {
+    clearInput() {
       this.newToDoItem = "";
     },
   },
@@ -65,5 +69,8 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.closeModalBtn {
+  color: #42b983;
 }
 </style>
